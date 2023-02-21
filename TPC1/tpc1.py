@@ -1,16 +1,20 @@
-import csv
 import math
 
 def main():
-    with open("myheart.csv", newline='') as file:
-        matrix = list(csv.reader(file))
+    with open("myheart.csv") as file:
+        content = file.readlines()
+        
+    matrix = []
+    
+    for line in content: 
+        matrix.append(list(line.strip().split(',')))
 
-    matrix.remove(matrix[0])
+    matrix.pop(0)
     dados = {'1' : [],
             '0' : []} 
     #[idade, sexo, tensao, colesterol, batimento, hasDoenca]
     for mens in matrix:
-        dados[mens[5]].append(mens[0:4])
+        dados[mens[5]].append(mens[:4])
     pessoasSexo = porSexo(dados)
     print(printTable(pessoasSexo))
    # print("Porcentagem de homens com a doenca: " + str(pessoasSexo['M']/pessoasSexo['T']*100) + "% \nPecentagem de mulheres com a doenca:" + str(pessoasSexo['F']/pessoasSexo['T']*100) + "%")
