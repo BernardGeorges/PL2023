@@ -39,20 +39,20 @@ def porNomes(dicios):
 
 def parente(dicts):
     ret = {}
-    par = re.compile(r',((\w+|\s+))\. Proc\.')
+    par = re.compile(r',([\w+|\s+]+)\.\s*Proc')
     for dicionario in dicts:
         resN3 = par.findall(dicionario['name3'])
         resN2 = par.findall(dicionario['name2'])
         resOPT = par.findall(dicionario['nameOpt'])
-        for (paren,_) in resN3: 
+        for (paren) in resN3: 
             if paren not in ret.keys():
                 ret[paren] = 0
             ret[paren] += 1
-        for (paren2,_) in resN2: 
+        for (paren2) in resN2: 
             if paren2 not in ret.keys():
                 ret[paren2] = 0
             ret[paren2] += 1
-        for (parenOpt,_) in resOPT: 
+        for (parenOpt) in resOPT: 
             if parenOpt not in ret.keys():
                 ret[parenOpt] = 0
             ret[parenOpt] += 1
@@ -77,8 +77,8 @@ for linha in file.readlines():
         
 
 #print("end")
-print(porAno(dicts))
-print(porNomes(dicts))
+#print(porAno(dicts))
+#print(porNomes(dicts))
 print(parente(dicts))
 #print(dicts[0])
 toJson(dicts)
